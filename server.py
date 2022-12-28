@@ -14,6 +14,7 @@ class Server:
         self.app.add_url_rule('/shutdown',view_func = self.shutdown)
         self.app.add_url_rule('/', view_func = self.get_home)
         self.app.add_url_rule('/home', view_func = self.get_home)
+    
     def run_server(self):
         self.server = threading.Thread(target=self.app.run, kwargs={'host':self.host, 'port': self.port})
         self.server.start()
@@ -36,5 +37,14 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     config = config_parser(args.config)
+
+    server_host = config['SERVER_HOST']
+    server_port = int(config['SERVER_PORT'])
+    
+    server = Server(
+        host=server_host,
+        port= server_port
+    )
+    server.run_server()
 
 

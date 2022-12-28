@@ -4,5 +4,5 @@ def config_parser(config_path):
         lines = config_files.readlines()
         for line in lines:
             k, v = line.split(' = ')
-            config[k] = v
+            config[k] = v.split('\n')[0]
         return config
